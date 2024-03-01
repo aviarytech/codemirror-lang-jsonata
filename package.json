@@ -1,7 +1,7 @@
 {
-  "name": "codemirror-lang-EXAMPLE",
-  "version": "0.1.0",
-  "description": "EXAMPLE language support for CodeMirror",
+  "name": "codemirror-lang-jsonata",
+  "version": "0.1.1",
+  "description": "JSONata language support for CodeMirror",
   "scripts": {
     "test": "mocha test/test.js",
     "prepare": "rollup -c"
@@ -16,9 +16,12 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
+    "@codemirror/autocomplete": "^6.13.0",
     "@codemirror/language": "^6.0.0",
+    "@codemirror/lint": "^6.5.0",
     "@lezer/highlight": "^1.0.0",
-    "@lezer/lr": "^1.0.0"
+    "@lezer/lr": "^1.0.0",
+    "jsonata": "^2.0.4"
   },
   "devDependencies": {
     "@lezer/generator": "^1.0.0",

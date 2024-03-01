@@ -1,30 +1,51 @@
-import {parser} from "./syntax.grammar"
-import {LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside, delimitedIndent} from "@codemirror/language"
-import {styleTags, tags as t} from "@lezer/highlight"
+import { parser } from './syntax.grammar';
+import {
+  LRLanguage,
+  LanguageSupport,
+  indentNodeProp,
+  foldNodeProp,
+  foldInside,
+  delimitedIndent,
+} from '@codemirror/language';
+import { styleTags, tags as t } from '@lezer/highlight';
+import { autoCompletionList } from './complete';
 
-export const EXAMPLELanguage = LRLanguage.define({
+export const JSONataLanguage = LRLanguage.define({
   parser: parser.configure({
     props: [
       indentNodeProp.add({
-        Application: delimitedIndent({closing: ")", align: false})
+        Application: delimitedIndent({ closing: ')', align: false }),
       }),
       foldNodeProp.add({
-        Application: foldInside
+        Application: foldInside,
       }),
       styleTags({
-        Identifier: t.variableName,
-        Boolean: t.bool,
+        'True False': t.bool,
+        Null: t.null,
+        Number: t.number,
         String: t.string,
-        LineComment: t.lineComment,
-        "( )": t.paren
-      })
-    ]
+        ArithmeticOperator: t.arithmeticOperator,
+        Operator: t.operator,
+        Variable: t.variableName,
+        Identifier: t.name,
+        Function: t.function(t.name),
+        '( )': t.paren,
+        '[ ]': t.squareBracket,
+        '{ }': t.brace,
+      }),
+    ],
   }),
   languageData: {
-    commentTokens: {line: ";"}
-  }
-})
+    commentTokens: { line: ';' },
+  },
+});
 
-export function EXAMPLE() {
-  return new LanguageSupport(EXAMPLELanguage)
+export function jsonata() {
+  return new LanguageSupport(JSONataLanguage, [
+    JSONataLanguage.data.of({
+      autocomplete: autoCompletionList(),
+    }),
+  ]);
 }
+
+export { jsonataParseLinter } from './lint';
