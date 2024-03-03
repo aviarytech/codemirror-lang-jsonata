@@ -7,7 +7,7 @@ export function autoCompletionList(): CompletionSource {
 const autocompletions = () => {
   return functionNames.map((functionName) => ({
     label: `$${functionName}`,
-    type: 'keyword',
+    type: 'function',
   }));
 };
 

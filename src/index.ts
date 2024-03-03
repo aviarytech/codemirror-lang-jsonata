@@ -9,6 +9,7 @@ import {
 } from '@codemirror/language';
 import { styleTags, tags as t } from '@lezer/highlight';
 import { autoCompletionList } from './complete';
+import { highlight } from './highlight';
 
 export const JSONataLanguage = LRLanguage.define({
   parser: parser.configure({
@@ -42,6 +43,7 @@ export const JSONataLanguage = LRLanguage.define({
 
 export function jsonata() {
   return new LanguageSupport(JSONataLanguage, [
+    highlight(),
     JSONataLanguage.data.of({
       autocomplete: autoCompletionList(),
     }),
