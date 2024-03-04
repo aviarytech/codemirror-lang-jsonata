@@ -12,10 +12,6 @@ expression {
   ArithmeticOperator
 }
 
-BinaryExpression {
-  expression (Operator | ArithmeticOperator) expression
-}
-
 Function { functionStart list<expression>? ")" }
 
 //The basic values, the same as JSON
