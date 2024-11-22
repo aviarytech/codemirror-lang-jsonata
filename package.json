@@ -1,6 +1,9 @@
 {
   "name": "@aviarytech/codemirror-lang-jsonata",
   "version": "0.2.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "JSONata language support for CodeMirror",
   "scripts": {
     "test": "mocha test/test.js",
